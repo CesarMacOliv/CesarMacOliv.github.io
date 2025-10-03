@@ -127,9 +127,9 @@ footer {
 
 /* ---------- Tabela de horários ---------- */
 .tabela-horarios {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
+  margin: 1.5rem auto;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -212,11 +212,24 @@ footer {
   border: 1px solid #ff1493;
 }
 
+/* Tamanho da tabela de horários */
+.tabela-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .tabela-horarios th,
   .tabela-horarios td {
     padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tabela-horarios {
+    width: 80%;
     font-size: 0.9rem;
   }
 }
