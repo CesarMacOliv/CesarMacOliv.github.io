@@ -124,3 +124,99 @@ footer {
   color: #fff;
   margin-top: 2rem;
 }
+
+/* ---------- Tabela de horários ---------- */
+.tabela-horarios {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.tabela-horarios th,
+.tabela-horarios td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.tabela-horarios th {
+  background: #e67e22;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tabela-horarios td {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tabela-horarios tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela-horarios tr:hover td {
+  background: #fdf2e9;
+}
+
+/* Negrito no horário (pode remover o inline style) */
+.tabela-horarios td:first-child {
+  font-weight: bold;
+  color: #333;
+}
+
+/* ---------- FullCalendar ---------- */
+#calendar {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* Cabeçalho do calendário */
+.fc-header-toolbar {
+  margin-bottom: 1rem;
+}
+
+.fc-button {
+  background-color: #e67e22;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.fc-button:hover {
+  background-color: #d35400;
+}
+
+/* Evento de cores personalizadas */
+.fc-event {
+  border-radius: 6px;
+  font-weight: 600;
+  color: #fff;
+  padding: 2px 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Diferenciar os eventos do Google Calendar (se quiser usar a className) */
+.fc-event.google-event {
+  border: 1px solid #ff1493;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .tabela-horarios th,
+  .tabela-horarios td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
