@@ -1,9 +1,4 @@
-/* Scroll suave */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Reset básico */
+/* ===== Estilo padrão (light mode) ===== */
 * {
   margin: 0;
   padding: 0;
@@ -11,48 +6,50 @@ html {
   font-family: "Segoe UI", sans-serif;
 }
 
-/* Estilo geral */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   line-height: 1.6;
   color: #333;
   background: #f9f9f9;
+  transition: background 0.3s, color 0.3s;
 }
 
-
-
-#calendar {
-  max-width: 900px;
-  width: 100%;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+/* Logo theming */
+.logo-claro {
+  display: inline-block;
 }
 
-.fc-toolbar-title {
-  font-size: 1.6rem;
-  color: #333;
+.logo-escuro {
+  display: none;
 }
 
-/* Tooltip (pop-up) */
-.event-tooltip {
-  position: absolute;
-  background: white;
-  color: black;
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  pointer-events: none;
-  z-index: 9999;
-  font-size: 0.9rem;
-  max-width: 220px;
-  transition: opacity 0.2s ease;
+@media (prefers-color-scheme: dark) {
+  .logo-claro {
+    display: none;
+  }
+
+  .logo-escuro {
+    display: inline-block;
+  }
 }
 
-.event-tooltip strong {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 4px;
+body.manual-light .logo-claro {
+  display: inline-block;
+}
+
+body.manual-light .logo-escuro {
+  display: none;
+}
+
+body.manual-dark .logo-claro {
+  display: none;
+}
+
+body.manual-dark .logo-escuro {
+  display: inline-block;
 }
 
 /* Navbar */
@@ -78,17 +75,7 @@ nav ul li {
   margin-left: 1.5rem;
 }
 
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-nav ul li a:hover {
-  color: #f1c40f;
-}
-
-/* Hero */
+/* Hero - Mantendo gradiente laranja original */
 .hero {
   text-align: center;
   padding: 2rem;
@@ -104,56 +91,85 @@ nav ul li a:hover {
   border: 3px solid #fff;
 }
 
-/* Seções */
-section {
-  padding: 2rem;
+/* Container e tabela */
+.container {
   max-width: 900px;
-  margin: auto;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tabela-horarios {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: #fff;
+  transition: background 0.3s, color 0.3s;
+}
+
+.tabela-horarios th,
+.tabela-horarios td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.tabela-horarios th {
+  background-color: #e67e22;
+  /* Laranja original */
+  color: #fff;
+  font-weight: bold;
+}
+
+.tabela-horarios tr:hover td {
+  background: #fdf2e9;
+  /* Laranja muito claro para hover */
+}
+
+/* Calendar */
+#calendar {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Main sections */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
 }
 
 section h2 {
   margin-bottom: 1rem;
   color: #e67e22;
+  /* Laranja original */
   border-bottom: 2px solid #e67e22;
+  /* Laranja original */
   display: inline-block;
 }
 
-/* Projetos */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.card {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card h3 {
-  margin-bottom: 0.5rem;
-}
-
-.card a {
-  display: inline-block;
-  margin-top: 0.5rem;
+a {
   color: #e67e22;
+  /* Laranja original em vez de verde */
   text-decoration: none;
   font-weight: bold;
 }
 
-.card a:hover {
+a:hover {
   text-decoration: underline;
+  color: #d35400;
+  /* Laranja mais escuro para hover */
 }
 
-/* Rodapé */
+/* Footer */
 footer {
   text-align: center;
   padding: 1rem;
@@ -162,97 +178,173 @@ footer {
   margin-top: 2rem;
 }
 
-/* ---------- Tabela de horários ---------- */
-.tabela-horarios {
-  width: 80%;
-  border-collapse: collapse;
-  margin: 1.5rem auto;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-.tabela-horarios th,
-.tabela-horarios td {
-  padding: 0.75rem 1rem;
-  text-align: center;
-}
-
-.tabela-horarios th {
+/* Theme toggle button - Adaptado para laranja */
+.theme-toggle {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   background: #e67e22;
+  /* Laranja original */
   color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.tabela-horarios td {
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.tabela-horarios tr:last-child td {
-  border-bottom: none;
-}
-
-.tabela-horarios tr:hover td {
-  background: #fdf2e9;
-}
-
-/* Negrito no horário (pode remover o inline style) */
-.tabela-horarios td:first-child {
   font-weight: bold;
-  color: #333;
+  transition: background 0.3s;
 }
 
-/* ---------- FullCalendar ---------- */
-#calendar {
-  max-width: 900px;
-  margin: 2rem auto;
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+.theme-toggle:hover {
+  background: #d35400;
+  /* Laranja mais escuro */
 }
 
-/* Cabeçalho do calendário */
-.fc-header-toolbar {
-  margin-bottom: 1rem;
+/* ===== Dark Mode automático ===== */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  a {
+    color: #f39c12;
+    /* Laranja mais claro para dark mode */
+  }
+
+  a:hover {
+    color: #f1c40f;
+    /* Amarelo-laranja para hover no dark mode */
+  }
+
+  .tabela-horarios {
+    background: #1e1e1e;
+  }
+
+  .tabela-horarios th,
+  .tabela-horarios td {
+    border: 1px solid #444;
+  }
+
+  .tabela-horarios th {
+    background-color: #e67e22;
+    /* Mantém laranja mesmo no dark mode */
+    color: #fff;
+  }
+
+  .tabela-horarios tr:hover td {
+    background: #2a2a2a;
+  }
+
+  #calendar {
+    background: #1e1e1e;
+  }
+
+  .theme-toggle {
+    background: #f39c12;
+    /* Laranja mais claro para dark mode */
+    color: #000;
+  }
+
+  .theme-toggle:hover {
+    background: #f1c40f;
+    /* Amarelo-laranja para hover */
+  }
+}
+
+/* ===== Forçar modo claro ===== */
+body.manual-light {
+  background: #f9f9f9 !important;
+  color: #333 !important;
+}
+
+body.manual-light a {
+  color: #e67e22 !important;
+  /* Laranja original */
+}
+
+body.manual-light a:hover {
+  color: #d35400 !important;
+  /* Laranja mais escuro */
+}
+
+body.manual-light .tabela-horarios {
+  background: #fff !important;
+}
+
+body.manual-light .tabela-horarios th {
+  background: #e67e22 !important;
+  /* Laranja original */
+  color: #fff !important;
+}
+
+body.manual-light .tabela-horarios tr:hover td {
+  background: #fdf2e9 !important;
+  /* Laranja muito claro */
+}
+
+body.manual-light #calendar {
+  background: #fff !important;
+}
+
+/* ===== Forçar modo escuro ===== */
+body.manual-dark {
+  background: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+body.manual-dark a {
+  color: #f39c12 !important;
+  /* Laranja mais claro */
+}
+
+body.manual-dark a:hover {
+  color: #f1c40f !important;
+  /* Amarelo-laranja */
+}
+
+body.manual-dark .tabela-horarios {
+  background: #1e1e1e !important;
+}
+
+body.manual-dark .tabela-horarios th {
+  background: #e67e22 !important;
+  /* Mantém laranja */
+  color: #fff !important;
+}
+
+body.manual-dark .tabela-horarios tr:hover td {
+  background: #2a2a2a !important;
+}
+
+body.manual-dark #calendar {
+  background: #1e1e1e !important;
+}
+
+/* FullCalendar customizations - Adaptado para laranja */
+.fc-toolbar-title {
+  font-size: 1.6rem;
 }
 
 .fc-button {
-  background-color: #e67e22;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 0.4rem 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
+  background-color: #e67e22 !important;
+  /* Laranja original */
+  color: #fff !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 0.4rem 0.8rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: 0.3s !important;
 }
 
 .fc-button:hover {
-  background-color: #d35400;
+  background-color: #d35400 !important;
+  /* Laranja mais escuro */
 }
 
-/* Evento de cores personalizadas */
 .fc-event {
-  border-radius: 6px;
-  font-weight: 600;
-  color: #fff;
-  padding: 2px 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Diferenciar os eventos do Google Calendar (se quiser usar a className) */
-.fc-event.google-event {
-  border: 1px solid #ff1493;
-}
-
-/* Tamanho da tabela de horários */
-.tabela-container {
-  max-width: 900px;
-  margin: 0 auto;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+  padding: 2px 4px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Responsividade */
@@ -263,11 +355,13 @@ footer {
     padding: 0.5rem;
     font-size: 0.9rem;
   }
-}
 
-@media (max-width: 768px) {
-  .tabela-horarios {
-    width: 80%;
-    font-size: 0.9rem;
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  nav ul {
+    margin-top: 1rem;
   }
 }

@@ -27,6 +27,39 @@ function gerarSextasAlternadas(inicio, fim, primeiraUCB = true) {
 
 const sextas = gerarSextasAlternadas('2025-10-10', '2065-12-31');
 
+// Theme toggle functionality
+const toggleBtn = document.getElementById("themeToggle");
+const body = document.body;
+
+// Verifica preferência salva
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+    body.classList.add("manual-dark");
+    toggleBtn.textContent = "☀️ Alternar Tema";
+} else if (savedTheme === "light") {
+    body.classList.add("manual-light");
+    toggleBtn.textContent = "🌙 Alternar Tema";
+}
+
+toggleBtn.addEventListener("click", () => {
+    if (body.classList.contains("manual-dark")) {
+        body.classList.remove("manual-dark");
+        body.classList.add("manual-light");
+        localStorage.setItem("theme", "light");
+        toggleBtn.textContent = "🌙 Alternar Tema";
+    } else if (body.classList.contains("manual-light")) {
+        body.classList.remove("manual-light");
+        body.classList.add("manual-dark");
+        localStorage.setItem("theme", "dark");
+        toggleBtn.textContent = "☀️ Alternar Tema";
+    } else {
+        // Se ainda não escolheu, aplica dark como primeiro clique
+        body.classList.add("manual-dark");
+        localStorage.setItem("theme", "dark");
+        toggleBtn.textContent = "☀️ Alternar Tema";
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
 
@@ -47,47 +80,47 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.style.zIndex = '99999'; // garante que fique acima do calendário
 
     modal.innerHTML = `
-        <div id="modalContent" style="
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 20px;
-            max-width: 420px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-            position: relative;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            transform: translateY(-8px);
-            opacity: 0;
-            transition: transform 0.18s ease, opacity 0.18s ease;
-        ">
-            <button id="closeModal" style="
-                position: absolute;
-                top: 8px;
-                right: 12px;
-                border: none;
-                background: transparent;
-                font-size: 20px;
-                cursor: pointer;
-                color: #555;
-            ">✖</button>
-            <h2 id="modalTitle" style="
-                font-size: 1.2rem;
-                margin: 0 0 6px 0;
-            "></h2>
-            <p id="modalDate" style="
-                font-size: 0.95rem;
-                margin: 0 0 10px 0;
-                opacity: 0.95;
-            "></p>
-            <p id="modalDescription" style="
-                font-size: 1rem;
-                line-height: 1.4;
-                white-space: pre-line;
-                margin: 0;
-            "></p>
-        </div>
-    `;
+                <div id="modalContent" style="
+                    background: #ffffff;
+                    border-radius: 16px;
+                    padding: 20px;
+                    max-width: 420px;
+                    width: 90%;
+                    text-align: center;
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+                    position: relative;
+                    font-family: 'Segoe UI', system-ui, sans-serif;
+                    transform: translateY(-8px);
+                    opacity: 0;
+                    transition: transform 0.18s ease, opacity 0.18s ease;
+                ">
+                    <button id="closeModal" style="
+                        position: absolute;
+                        top: 8px;
+                        right: 12px;
+                        border: none;
+                        background: transparent;
+                        font-size: 20px;
+                        cursor: pointer;
+                        color: #555;
+                    ">✖</button>
+                    <h2 id="modalTitle" style="
+                        font-size: 1.2rem;
+                        margin: 0 0 6px 0;
+                    "></h2>
+                    <p id="modalDate" style="
+                        font-size: 0.95rem;
+                        margin: 0 0 10px 0;
+                        opacity: 0.95;
+                    "></p>
+                    <p id="modalDescription" style="
+                        font-size: 1rem;
+                        line-height: 1.4;
+                        white-space: pre-line;
+                        margin: 0;
+                    "></p>
+                </div>
+            `;
     document.body.appendChild(modal);
 
     // referências

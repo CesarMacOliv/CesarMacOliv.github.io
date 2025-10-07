@@ -5,17 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda - César Macedo</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/favicon2.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.9/index.global.min.js"></script>
-    <style>
-        #calendar {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -24,16 +18,19 @@
             <a style="text-decoration: none; color: inherit;" href="">
                 <h1>César Macedo</h1>
             </a>
+            <button class="theme-toggle" id="themeToggle">🌙 Alternar Tema</button>
             <ul>
                 <li>Em breve</li>
             </ul>
         </nav>
         <div class="hero">
-            <img src="images/profile.jpg" alt="Foto de perfil">
+            <img src="images/profile.jpg" alt="Foto de perfil" class="logo-claro">
+            <img src="images/profile.jpg" alt="Foto de perfil" class="logo-escuro">
             <h2>Químico • Pesquisador • Desenvolvedor • Técnico de Laboratório</h2>
             <p>Construindo ciência e tecnologia com criatividade ✨</p>
         </div>
     </header>
+    
     <div class="container">
         <h1 style="margin: 1.5rem auto; text-align: center;">
             Horários de atendimento
@@ -129,6 +126,7 @@
             </tr>
         </table>
     </div>
+    
     <div id="calendar"></div>
 
     <main>
@@ -140,11 +138,11 @@
             </p>
         </section>
     </main>
+
+    <footer>
+        <p>Feito com ❤️ por César Macedo • Hospedado no GitHub Pages</p>
+    </footer>
+
     <script src="scripts/schedule.js"></script>
 </body>
-
-<footer>
-    <p>Feito com ❤️ por César Macedo • Hospedado no GitHub Pages</p>
-</footer>
-
 </html>
