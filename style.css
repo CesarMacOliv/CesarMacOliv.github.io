@@ -18,6 +18,43 @@ body {
   background: #f9f9f9;
 }
 
+
+
+#calendar {
+  max-width: 900px;
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.fc-toolbar-title {
+  font-size: 1.6rem;
+  color: #333;
+}
+
+/* Tooltip (pop-up) */
+.event-tooltip {
+  position: absolute;
+  background: white;
+  color: black;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 0.9rem;
+  max-width: 220px;
+  transition: opacity 0.2s ease;
+}
+
+.event-tooltip strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
 /* Navbar */
 nav {
   display: flex;
@@ -92,7 +129,7 @@ section h2 {
   background: #fff;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
 }
 
@@ -133,7 +170,7 @@ footer {
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .tabela-horarios th,
@@ -175,7 +212,7 @@ footer {
   background: #fff;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Cabeçalho do calendário */
@@ -204,7 +241,7 @@ footer {
   font-weight: 600;
   color: #fff;
   padding: 2px 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Diferenciar os eventos do Google Calendar (se quiser usar a className) */
@@ -220,6 +257,7 @@ footer {
 
 /* Responsividade */
 @media (max-width: 768px) {
+
   .tabela-horarios th,
   .tabela-horarios td {
     padding: 0.5rem;
