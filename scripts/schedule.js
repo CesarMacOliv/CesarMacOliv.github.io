@@ -221,109 +221,117 @@ document.addEventListener('DOMContentLoaded', function () {
     // FullCalendar init
     // ----------------------
     const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'pt-br',
-        height: 'auto',
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    initialView: 'dayGridMonth',
+    locale: 'pt-br',
+    height: 'auto',
+    headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'none'
+    },
+    buttonText: {
+        today: 'Hoje'
+    },
+    googleCalendarApiKey: 'AIzaSyC1lY4vSzRAZxX_rA9MumBR2XvBYMQJWnk',
+    events: [
+        {
+            title: 'UCB',
+            daysOfWeek: [1, 3],
+            allDay: true,
+            startRecur: '2025-10-06',
+            endRecur: '2025-12-31',
+            backgroundColor: '#1E90FF',
+            borderColor: '#1E90FF'
         },
-        buttonText: {
-            today: 'Hoje',
-            month: 'Mês',
-            week: 'Semana',
-            day: 'Dia',
-            list: 'Lista'
+        {
+            title: 'LIPP',
+            daysOfWeek: [2, 4],
+            allDay: true,
+            startRecur: '2025-10-07',
+            endRecur: '2025-12-31',
+            backgroundColor: '#32CD32',
+            borderColor: '#32CD32'
         },
-        googleCalendarApiKey: 'AIzaSyC1lY4vSzRAZxX_rA9MumBR2XvBYMQJWnk',
-        events: [
-            {
-                title: 'UCB',
-                daysOfWeek: [1, 3],
-                allDay: true,
-                startRecur: '2025-10-06',
-                endRecur: '2025-12-31',
-                backgroundColor: '#1E90FF',
-                borderColor: '#1E90FF'
-            },
-            {
-                title: 'LIPP',
-                daysOfWeek: [2, 4],
-                allDay: true,
-                startRecur: '2025-10-07',
-                endRecur: '2025-12-31',
-                backgroundColor: '#32CD32',
-                borderColor: '#32CD32'
-            },
-            ...sextas
-        ],
-        eventSources: [
-            {
-                googleCalendarId: 'c_e0e83e91a25f037c6008b4fb7c81c3eb6e3fb1586704c37cc7cbeb90859e3353@group.calendar.google.com',
-                color: '#ac0dfcff'
-            },
-            {
-                googleCalendarId: 'c_0717255d9662397d4eb92b5189bbfd8405ec8df8ad7edaa31b62c98ae1c7375b@group.calendar.google.com',
-                color: '#FFA500'
-            },
-            {
-                googleCalendarId: 'c_b0ade61e1b07fb52e8a6c04d0f1297de4faa16794796e381739e169f92e383e9@group.calendar.google.com',
-                color: '#ff0000ff'
-            }
-        ],
-
-        eventClick: function (info) {
-            // impede redirecionamento para o Google Calendar
-            info.jsEvent.preventDefault();
-
-            const event = info.event;
-            const start = event.start;
-            const end = event.end || null;
-            const isAllDay = event.allDay;
-
-            // formatos de data
-            const dateOptionsDateOnly = { day: '2-digit', month: '2-digit', year: 'numeric' };
-            const dateOptionsDateTime = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
-
-            let dateText = '';
-            if (isAllDay) {
-                dateText = start.toLocaleDateString('pt-BR', dateOptionsDateOnly) +
-                    (end ? ` até ${end.toLocaleDateString('pt-BR', dateOptionsDateOnly)}` : '');
-            } else {
-                dateText = start.toLocaleDateString('pt-BR', dateOptionsDateTime) +
-                    (end ? ` até ${end.toLocaleDateString('pt-BR', dateOptionsDateTime)}` : '');
-            }
-
-            // Detecta a cor do evento de forma robusta:
-            // tenta propriedades do evento, depois o estilo do elemento, depois computedStyle, senão fallback
-            let rawColor = event.backgroundColor || event.borderColor || '';
-            if (!rawColor && info.el) {
-                rawColor = info.el.style.backgroundColor || window.getComputedStyle(info.el).backgroundColor || '';
-            }
-            if (!rawColor) rawColor = '#e0e0e0ff'; // fallback
-
-            // transforma para rgba com alpha menor (menos saturado/mais translúcido)
-            const bgRgba = parseColorToRgba(rawColor, 0.96);
-            const textColor = getContrastFromRgba(bgRgba);
-
-            // aplica cor e texto no modal
-            modalContent.style.background = bgRgba;
-            modalContent.style.color = textColor;
-            closeBtn.style.color = textColor;
-
-            modalTitle.textContent = event.title || 'Evento';
-            modalDate.textContent = dateText;
-            modalDescription.textContent = event.extendedProps && event.extendedProps.description ? event.extendedProps.description : 'Sem descrição disponível.';
-
-            // ajusta cores específicas dos elementos (se quiser separar)
-            modalTitle.style.color = textColor;
-            modalDate.style.color = textColor;
-            modalDescription.style.color = textColor;
-
-            openModal();
+        ...sextas
+    ],
+    eventSources: [
+        {
+            googleCalendarId: 'c_e0e83e91a25f037c6008b4fb7c81c3eb6e3fb1586704c37cc7cbeb90859e3353@group.calendar.google.com',
+            color: '#ac0dfcff'
+        },
+        {
+            googleCalendarId: 'c_0717255d9662397d4eb92b5189bbfd8405ec8df8ad7edaa31b62c98ae1c7375b@group.calendar.google.com',
+            color: '#FFA500'
+        },
+        {
+            googleCalendarId: 'c_b0ade61e1b07fb52e8a6c04d0f1297de4faa16794796e381739e169f92e383e9@group.calendar.google.com',
+            color: '#ff0000ff'
         }
-    });
+    ],
+
+    eventClick: function (info) {
+        info.jsEvent.preventDefault();
+
+        const event = info.event;
+        const start = event.start;
+        const end = event.end || null;
+        const isAllDay = event.allDay;
+
+        const dateOptionsDateOnly = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const dateOptionsDateTime = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+
+        let dateText = '';
+        if (isAllDay) {
+            dateText = start.toLocaleDateString('pt-BR', dateOptionsDateOnly) +
+                (end ? ` até ${end.toLocaleDateString('pt-BR', dateOptionsDateOnly)}` : '');
+        } else {
+            dateText = start.toLocaleDateString('pt-BR', dateOptionsDateTime) +
+                (end ? ` até ${end.toLocaleDateString('pt-BR', dateOptionsDateTime)}` : '');
+        }
+
+        let rawColor = event.backgroundColor || event.borderColor || '';
+        if (!rawColor && info.el) {
+            rawColor = info.el.style.backgroundColor || window.getComputedStyle(info.el).backgroundColor || '';
+        }
+        if (!rawColor) rawColor = '#e0e0e0ff';
+
+        const bgRgba = parseColorToRgba(rawColor, 0.96);
+        const textColor = getContrastFromRgba(bgRgba);
+
+        modalContent.style.background = bgRgba;
+        modalContent.style.color = textColor;
+        closeBtn.style.color = textColor;
+
+        modalTitle.textContent = event.title || 'Evento';
+        modalDate.textContent = dateText;
+        modalDescription.textContent = event.extendedProps?.description || 'Sem descrição disponível.';
+
+        modalTitle.style.color = textColor;
+        modalDate.style.color = textColor;
+        modalDescription.style.color = textColor;
+
+        openModal();
+    },
+
+    // Insere a legenda apenas uma vez, de forma persistente
+    datesSet: function () {
+        const toolbar = calendarEl.querySelector('.fc-toolbar');
+        if (toolbar && !toolbar.querySelector('.calendar-legend')) {
+            const legend = document.createElement('div');
+            legend.className = 'calendar-legend';
+            legend.innerHTML = `
+                <div class="legend-item"><span style="background-color:#1E90FF"></span>UCB</div>
+                <div class="legend-item"><span style="background-color:#32CD32"></span>LIPP</div>
+                <div class="legend-item"><span style="background-color:#ac0dfc"></span>Servidor</div>
+                <div class="legend-item"><span style="background-color:#FFA500"></span>Requisições</div>
+                <div class="legend-item"><span style="background-color:#ff0000"></span>Doutorado</div>
+            `;
+            // coloca a legenda dentro da toolbar, logo após o título
+            const centerSection = toolbar.querySelector('.fc-toolbar-chunk:nth-child(2)');
+            if (centerSection) centerSection.appendChild(legend);
+        }
+    }
+});
 
     calendar.render();
 });

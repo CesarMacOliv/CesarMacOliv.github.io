@@ -365,3 +365,23 @@ body.manual-dark #calendar {
     margin-top: 1rem;
   }
 }
+
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.legend-item span {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+}
